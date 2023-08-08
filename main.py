@@ -88,9 +88,20 @@ def check_cost(drink_type, payment):
 order = input("What would you like? Type espresso, latte, or cappucino and press Enter. Type report "
               "to get a report on machine resources or quit to end the program. ")
 
+if order == 'quit':
+    make_drink(order)
+elif order == 'report':
+    report()
+else:
+    while order != 'quit':
+        make_drink(order)
+        order = input("What would you like? (espresso/latte/cappuccino) ")
+        if order == 'quit':
+            make_drink(order)
+        elif order == 'report':
+            report()
 
-make_drink(order)
-total_paid = take_coins()
-check_cost(order, total_paid)
+#total_paid = take_coins()
+#check_cost(order, total_paid)
 
 
