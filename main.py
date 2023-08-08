@@ -54,8 +54,11 @@ def make_drink(drink_type):
                 return
         case 'report':
             report()
+        case 'quit':
+            print("Quitting program.")
+            return
         case _:
-            print("Not an espresso!")
+            print("Not a valid entry!")
 
 
 def take_coins():
@@ -82,7 +85,12 @@ def check_cost(drink_type, payment):
         return
 
 
-order = "cappuccino"
+order = input("What would you like? Type espresso, latte, or cappucino and press Enter. Type report "
+              "to get a report on machine resources or quit to end the program. ")
+
+
 make_drink(order)
 total_paid = take_coins()
 check_cost(order, total_paid)
+
+
