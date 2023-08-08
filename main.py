@@ -26,8 +26,12 @@ def make_drink(drink_type):
                 print("Not enough coffee to make an espresso.")
                 return
             else:
-                resources['water'] = resources['water'] - MENU["espresso"]["ingredients"]["water"]
-                resources['coffee'] = resources['coffee'] - MENU["espresso"]["ingredients"]["coffee"]
+                total_paid = take_coins()
+                if check_cost(order, total_paid):
+                    resources['water'] = resources['water'] - MENU["espresso"]["ingredients"]["water"]
+                    resources['coffee'] = resources['coffee'] - MENU["espresso"]["ingredients"]["coffee"]
+                else:
+                    print(f"Not enough paid for a {order}.")
                 return
         case 'latte':
             if resources['water'] < MENU["latte"]["ingredients"]["water"]:
@@ -39,9 +43,13 @@ def make_drink(drink_type):
                 print("Not enough coffee to make an latte.")
                 return
             else:
-                resources['water'] = resources['water'] - MENU["latte"]["ingredients"]["water"]
-                resources['milk'] = resources['milk'] - MENU["latte"]["ingredients"]["milk"]
-                resources['coffee'] = resources['coffee'] - MENU["latte"]["ingredients"]["coffee"]
+                total_paid = take_coins()
+                if check_cost(order, total_paid):
+                    resources['water'] = resources['water'] - MENU["latte"]["ingredients"]["water"]
+                    resources['milk'] = resources['milk'] - MENU["latte"]["ingredients"]["milk"]
+                    resources['coffee'] = resources['coffee'] - MENU["latte"]["ingredients"]["coffee"]
+                else:
+                    print(f"Not enough paid for a {order}.")
                 return
         case 'cappuccino':
             if resources['water'] < MENU["cappuccino"]["ingredients"]["water"]:
@@ -53,9 +61,13 @@ def make_drink(drink_type):
                 print("Not enough coffee to make an cappuccino.")
                 return
             else:
-                resources['water'] = resources['water'] - MENU["cappuccino"]["ingredients"]["water"]
-                resources['milk'] = resources['milk'] - MENU["cappuccino"]["ingredients"]["milk"]
-                resources['coffee'] = resources['coffee'] - MENU["cappuccino"]["ingredients"]["coffee"]
+                total_paid = take_coins()
+                if check_cost(order, total_paid):
+                    resources['water'] = resources['water'] - MENU["cappuccino"]["ingredients"]["water"]
+                    resources['milk'] = resources['milk'] - MENU["cappuccino"]["ingredients"]["milk"]
+                    resources['coffee'] = resources['coffee'] - MENU["cappuccino"]["ingredients"]["coffee"]
+                else:
+                    print(f"Not enough paid for a {order}.")
                 return
         case 'report':
             report()
@@ -80,14 +92,13 @@ def take_coins():
 
 def check_cost(drink_type, payment):
     if drink_type == 'espresso' and payment < int(MENU['espresso']['cost']):
-        print("You didn't pay enough for an espresso.")
-        return
+        return False
     elif drink_type == 'latte' and payment < int(MENU['latte']['cost']):
-        print("You didn't pay enough for a latte.")
-        return
+        return False
     elif drink_type == 'cappuccino' and payment < int(MENU['cappuccino']['cost']):
-        print("You didn't pay enough for a cappuccino.")
-        return
+        return False
+    else:
+        return True
 
 
 order = input("What would you like? Type espresso, latte, or cappucino and press Enter. Type report "
@@ -95,18 +106,11 @@ order = input("What would you like? Type espresso, latte, or cappucino and press
 
 if order == 'quit':
     make_drink(order)
-elif order == 'report':
-    report()
 else:
     while order != 'quit':
         make_drink(order)
         order = input("What would you like? (espresso/latte/cappuccino) ")
         if order == 'quit':
             make_drink(order)
-        elif order == 'report':
-            report()
-
-#total_paid = take_coins()
-#check_cost(order, total_paid)
 
 
