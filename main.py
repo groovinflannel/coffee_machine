@@ -2,7 +2,7 @@ from menu import MENU
 from resources import resources
 
 
-# TODO: 1. Print report of all of the coffee machine's resources
+# 1. Print report of all of the coffee machine's resources
 # TODO: 2. Check that resources are sufficient to make drink order
 # TODO: 3. Check that coins given are more than the cost of the drink
 # TODO: 4. Return the correct change to the user
@@ -16,4 +16,19 @@ def report():
     print(f"Coffee: {resources['coffee']}")
 
 
-report()
+def make_drink(drink_type):
+    match drink_type:
+        case 'espresso':
+            print("Here's an espresso!")
+        case 'latte':
+            print("Here's a latte!")
+        case 'cappuccino':
+            print("Here's a cappuccino!")
+        case 'report':
+            report()
+        case _:
+            print("Not an espresso!")
+
+
+order = "report"
+make_drink(order)
