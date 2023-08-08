@@ -29,14 +29,34 @@ def make_drink(drink_type):
                 print("Here's an espresso!")
                 return
         case 'latte':
-            print("Here's a latte!")
+            if resources['water'] < MENU["latte"]["ingredients"]["water"]:
+                print("Not enough water to make an latte.")
+                return
+            elif resources['milk'] < MENU["latte"]["ingredients"]["milk"]:
+                print("Not enough milk to make an latte.")
+            elif resources['coffee'] < MENU["latte"]["ingredients"]["coffee"]:
+                print("Not enough coffee to make an latte.")
+                return
+            else:
+                print("Here's a latte!")
+                return
         case 'cappuccino':
-            print("Here's a cappuccino!")
+            if resources['water'] < MENU["cappuccino"]["ingredients"]["water"]:
+                print("Not enough water to make an cappuccino.")
+                return
+            elif resources['milk'] < MENU["cappuccino"]["ingredients"]["milk"]:
+                print("Not enough milk to make an cappuccino.")
+            elif resources['coffee'] < MENU["cappuccino"]["ingredients"]["coffee"]:
+                print("Not enough coffee to make an cappuccino.")
+                return
+            else:
+                print("Here's a cappuccino!")
+                return
         case 'report':
             report()
         case _:
             print("Not an espresso!")
 
 
-order = "espresso"
+order = "cappuccino"
 make_drink(order)
