@@ -3,8 +3,8 @@ from resources import resources
 
 
 # 1. Print report of all of the coffee machine's resources
-# TODO: 2. Check that resources are sufficient to make drink order
-# TODO: 3. Check that coins given are more than the cost of the drink
+# 2. Check that resources are sufficient to make drink order
+# 3. Check that coins given are more than the cost of the drink
 # TODO: 4. Return the correct change to the user
 # TODO: 5. Make the drink and print a successful message for the user
 
@@ -30,6 +30,7 @@ def make_drink(drink_type):
                 if check_cost(order, total_paid):
                     resources['water'] = resources['water'] - MENU["espresso"]["ingredients"]["water"]
                     resources['coffee'] = resources['coffee'] - MENU["espresso"]["ingredients"]["coffee"]
+                    return_change(drink_type, total_paid)
                 else:
                     print(f"Not enough paid for a {order}.")
                 return
@@ -48,6 +49,7 @@ def make_drink(drink_type):
                     resources['water'] = resources['water'] - MENU["latte"]["ingredients"]["water"]
                     resources['milk'] = resources['milk'] - MENU["latte"]["ingredients"]["milk"]
                     resources['coffee'] = resources['coffee'] - MENU["latte"]["ingredients"]["coffee"]
+                    return_change(drink_type, total_paid)
                 else:
                     print(f"Not enough paid for a {order}.")
                 return
@@ -66,6 +68,7 @@ def make_drink(drink_type):
                     resources['water'] = resources['water'] - MENU["cappuccino"]["ingredients"]["water"]
                     resources['milk'] = resources['milk'] - MENU["cappuccino"]["ingredients"]["milk"]
                     resources['coffee'] = resources['coffee'] - MENU["cappuccino"]["ingredients"]["coffee"]
+                    return_change(drink_type, total_paid)
                 else:
                     print(f"Not enough paid for a {order}.")
                 return
@@ -101,7 +104,18 @@ def check_cost(drink_type, payment):
         return True
 
 
-order = input("What would you like? Type espresso, latte, or cappucino and press Enter. Type report "
+def return_change(drink_type, payment):
+    if drink_type == 'espresso':
+        print(f"Payment successful! Your change is ${round(payment - int(MENU['espresso']['cost']), 2)}")
+    elif drink_type == 'latte':
+        print(f"Payment successful! Your change is ${round(payment - int(MENU['latte']['cost']), 2)}")
+    elif drink_type == 'cappuccino':
+        print(f"Payment successful! Your change is ${round(payment - int(MENU['cappuccino']['cost']), 2)}")
+    else:
+        print("Payment error.")
+
+
+order = input("What would you like? Type espresso, latte, or cappuccino and press Enter. Type report "
               "to get a report on machine resources or quit to end the program. ")
 
 if order == 'quit':
