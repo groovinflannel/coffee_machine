@@ -57,17 +57,32 @@ def make_drink(drink_type):
         case _:
             print("Not an espresso!")
 
+
 def take_coins():
     print("Please insert coins.")
-    quarters = int(input("How many quarters?"))
-    dimes = int(input("How many dimes?"))
-    nickels = int(input("How many nickels?"))
-    pennies = int(input("How many pennies?"))
+    quarters = int(input("How many quarters? "))
+    dimes = int(input("How many dimes? "))
+    nickels = int(input("How many nickels? "))
+    pennies = int(input("How many pennies? "))
 
     total_inserted = (quarters * .25) + (dimes * .10) + (nickels * .05) + (pennies * .01)
 
-    print(total_inserted)
+    return total_inserted
+
+
+def check_cost(drink_type, payment):
+    if drink_type == 'espresso' and payment < int(MENU['espresso']['cost']):
+        print("You didn't pay enough for an espresso.")
+        return
+    elif drink_type == 'latte' and payment < int(MENU['latte']['cost']):
+        print("You didn't pay enough for a latte.")
+        return
+    elif drink_type == 'cappuccino' and payment < int(MENU['cappuccino']['cost']):
+        print("You didn't pay enough for a cappuccino.")
+        return
+
 
 order = "cappuccino"
 make_drink(order)
-take_coins()
+total_paid = take_coins()
+check_cost(order, total_paid)
