@@ -57,6 +57,17 @@ def make_drink(drink_type):
         case _:
             print("Not an espresso!")
 
+def take_coins():
+    print("Please insert coins.")
+    quarters = int(input("How many quarters?"))
+    dimes = int(input("How many dimes?"))
+    nickels = int(input("How many nickels?"))
+    pennies = int(input("How many pennies?"))
+
+    total_inserted = (quarters * .25) + (dimes * .10) + (nickels * .05) + (pennies * .01)
+
+    print(total_inserted)
 
 order = "cappuccino"
 make_drink(order)
+take_coins()
