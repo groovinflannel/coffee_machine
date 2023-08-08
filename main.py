@@ -19,7 +19,15 @@ def report():
 def make_drink(drink_type):
     match drink_type:
         case 'espresso':
-            print("Here's an espresso!")
+            if resources['water'] < 50:
+                print("Not enough water to make an espresso.")
+                return
+            elif resources['coffee'] < 18:
+                print("Not enough coffee to make an espresso.")
+                return
+            else:
+                print("Here's an espresso!")
+                return
         case 'latte':
             print("Here's a latte!")
         case 'cappuccino':
@@ -30,5 +38,5 @@ def make_drink(drink_type):
             print("Not an espresso!")
 
 
-order = "report"
+order = "espresso"
 make_drink(order)
